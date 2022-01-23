@@ -305,6 +305,20 @@
     width: 100%;
     height: 100%;
 }
+.arenaInventory {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    overflow: hidden scroll;
+}
+.arenaCard {
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+    cursor: pointer;
+}
 
 /*FLEX*/
 .d-flex {
