@@ -27,18 +27,11 @@ const ToolBar = () => {
                         <div id='/main' onClick={event => nav(event.target.id)} className='btn'>MAIN</div>
                         <div id='/arena' onClick={event => nav(event.target.id)} className='btn ml40'>ARENA</div>
                     </div>
-                    : null}
-                {location.pathname === '/main' ?
-                    <div className='d-flex'>
+                    :  <div className='d-flex'>
                         <div id='/shop' onClick={event => nav(event.target.id)} className='btn'>SHOP</div>
                         <div id='/arena' onClick={event => nav(event.target.id)} className='btn ml40'>ARENA</div>
-                    </div> : null
-                    }
-                {location.pathname === '/arena' ?
-                    <div className='d-flex'>
-                        <div id='/inventory' onClick={openInv} className='btn'>INVENTORY</div>
-                    </div> : null
-                }
+                    </div> }
+
             </div>
             <div className='d-flex'>
                 {gold === 0 ? null : <div className='btn'>GOLD: {gold}</div>}

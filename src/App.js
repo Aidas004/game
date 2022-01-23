@@ -3,7 +3,7 @@ import StartPage from "./pages/StartPage";
 import MainPage from "./pages/MainPage";
 import ShopPage from "./pages/ShopPage";
 import ArenaPage from "./pages/ArenaPage";
-import {BrowserRouter as Router, Routes, Route} from "react-router-dom";
+import {HashRouter as Router, Routes, Route} from "react-router-dom";
 
 function App() {
 

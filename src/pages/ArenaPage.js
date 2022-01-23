@@ -25,7 +25,7 @@ const ArenaPage = () => {
     const character = useSelector((state => state.character.value))
     const playerHpPercents = Math.round(playerHp * 100 / character.health)
     const monsterHpPercents = Math.round(enemyHp * 100 / getEnemy.health)
-    const energyPercents = Math.round(energy * 100 / getMaxEnergy)
+    const energyPercents = Math.round(energy * 100 / character.energy)
     const equip = useSelector((state => state.equip.value))
     const equipped = equip.maxDamage > 0
     const navigate = useNavigate()
@@ -759,30 +759,35 @@ const ArenaPage = () => {
                 {<ToolBar/>}
                 {playerCard}
 
-                <div className="Card">
-                    {!getMonster && !getStart ? <button onClick={findEnemy}>FIND ENEMY</button> : null}
-                    {getMonster && !getStart ? <button onClick={start}>START FIGHT</button> : null}
-                    {getMonster && getStart && !getWin && !getGameOver ?
-                        <button onClick={attack}>ATTACK</button> : null}
-                    {getGameOver ?
-                        <div className='d-flex column'>
-                            <h1>GAME OVER!</h1>
-                            <button id='/' onClick={event => goLobby(event.target.id)}>Try again!</button>
-                        </div>
-                        : null}
-                    {getWin ?
-                        <div className='d-flex column'>
-                            <h1>Your win</h1>
-                            <button onClick={findNewEnemy}>Play again</button>
-                            <button id='/main' onClick={event => goLobby(event.target.id)}>go to main page</button>
-                        </div>
-                        : null}
+                <div style={{backgroundColor: "transparent", boxShadow: "none"}} className="Card">
+                    <div className='d-flex j-center a-center h50 w100'>
+                        {!getMonster && !getStart ? <button className='arenaBtn' onClick={findEnemy}>FIND ENEMY</button> : null}
+                        {getMonster && !getStart ? <button className='arenaBtn' onClick={start}>START FIGHT</button> : null}
+                        {getMonster && getStart && !getWin && !getGameOver ?
+                            <button className='arenaBtn' onClick={attack}>ATTACK</button> : null}
+                        {getGameOver ?
+                            <div className='d-flex column'>
+                                <h1>GAME OVER!</h1>
+                                <button className='arenaBtn' id='/' onClick={event => goLobby(event.target.id)}>Try again!</button>
+                            </div>
+                            : null}
+                        {getWin ?
+                            <div className='d-flex column'>
+                                <h1>Your win</h1>
+                                <button className='arenaBtn' onClick={findNewEnemy}>Play again</button>
+                                <button className='arenaBtn' id='/main' onClick={event => goLobby(event.target.id)}>go to main page</button>
+                            </div>
+                            : null}
+                    </div>
+                    <div className='h50 w100 arenaInventory'>
+                        {mapInventory}
+                    </div>
 
 
                 </div>
 
                 <div className="Card">
-                    {getMonster && !getWin && !inventoryOpen ?
+                    {getMonster && !getWin ?
                         <div className='d-flex column a-center j-center insideCard'>
                             <div className="image">
                                 <img src={getEnemy.image} alt=""/>
@@ -812,9 +817,7 @@ const ArenaPage = () => {
                                 </div>
                             </div>
                         </div>
-                        : <div className='arenaInventory'>
-                            {mapInventory}
-                        </div>  }
+                        : null }
 
 
                 </div>
