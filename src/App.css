@@ -1,38 +1,355 @@
+/*MAIN*/
+* {
+    color: #8e9297;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #484b52;
+}
+
+::-webkit-scrollbar-track {
+    background: #38383a;
+}
+
+::-webkit-scrollbar {
+    width: 5px;
+}
+
 .App {
-  text-align: center;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background-color: #2f3136;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/*OTHERS*/
+
+.weaponEquipped img {
+    width: 100px;
+    height: 100px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.weapons {
+    width: 100%;
+    height: 20%;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+
+/*TOOLBAR*/
+
+.toolbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    margin-bottom: 20px;
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    background-color: #202225;
+    box-sizing: border-box;
+    box-shadow: rgba(0, 0, 0, 0.35) 0 5px 15px;
+
 }
 
-.App-link {
-  color: #61dafb;
+/*BUTTONS*/
+
+.btn {
+    color: white;
+    cursor: pointer;
+}
+.removeWeapon {
+    display: flex;
+    justify-content: end;
+    width: 10%;
+}
+.removeWeapon h3 {
+    margin-top: 5px;
+    transition: 0.2s;
+}
+.removeWeapon h3:hover {
+    color: red;
+}
+/*WINDOWS*/
+
+.mainWindow {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-top: 25px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.mainWindow2 {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/*CHARACTER BOXES*/
+
+
+.characterWindow {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    overflow: scroll;
+}
+
+.characterBox {
+    box-sizing: border-box;
+    width: 325px;
+    background-color: #36393f;
+    margin: 15px;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0 5px 15px;
+    cursor: pointer;
+    display: flex;
+}
+
+.characterBox img {
+    width: 50%;
+}
+
+.characterBox div {
+    margin-left: 10px;
+}
+
+.characterMenu {
+    width: 40%;
+    height: 85%;
+    background-color: #36393f;
+    border-radius: 10px;
+    margin: 20px;
+    box-shadow: rgba(0, 0, 0, 0.19) 0 10px 20px, rgba(0, 0, 0, 0.23) 0 6px 6px;
+}
+.left1 {
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.left1 img {
+    width: 100%;
+}
+.right1 {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+/*INVENTORY*/
+
+.inventory {
+    width: 60%;
+    height: 85%;
+    background-color: #36393f;
+    border-radius: 10px;
+    margin: 20px;
+    display: flex;
+    align-items: flex-start;
+    box-shadow: rgba(0, 0, 0, 0.19) 0 10px 20px, rgba(0, 0, 0, 0.23) 0 6px 6px;
+    overflow: hidden scroll;
+}
+
+.inventorySlots {
+    width: 100px;
+    height: 100px;
+    border-radius: 10px;
+    background-color: #2f3136;
+    margin: 10px;
+    box-shadow: rgba(0, 0, 0, 0.19) 0 10px 20px, rgba(0, 0, 0, 0.23) 0 6px 6px;
+}
+
+/*SHOP*/
+.shopMenu {
+    width: 40%;
+    height: 85%;
+    background-color: #36393f;
+    border-radius: 10px;
+    margin: 20px;
+    overflow: scroll;
+    overflow-x: hidden;
+    box-shadow: rgba(0, 0, 0, 0.19) 0 10px 20px, rgba(0, 0, 0, 0.23) 0 6px 6px;
+}
+
+.shopToolBar {
+    width: 100%;
+    padding: 10px;
+    background-color: #202225;
+    box-sizing: border-box;
+    justify-content: space-around;
+    box-shadow: rgba(0, 0, 0, 0.35) 0 5px 15px;
+}
+
+.wepWindow {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.wepCard {
+    width: 200px;
+    margin: 10px;
+    border-radius: 5px;
+    padding: 5px;
+    box-sizing: border-box;
+    background-color: #2f3136;
+    cursor: pointer;
+}
+.wepCard:hover {
+    transform: scale(1.02);
+}
+.wepCard img {
+    width: 52px;
+    height: 52px;
+}
+
+.wepCard div {
+    margin-left: 5px;
+}
+.sellBtn {
+    color: white;
+    cursor: pointer;
+    transition: 0.1s;
+}
+.sellBtn:hover {
+    color: red;
+}
+.left {
+    width: 80%;
+}
+.right {
+    width: 20%;
+    display: flex;
+    justify-content: end;
+}
+
+/*ARENA*/
+
+.arenaWindow {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 25px;
+
+}
+.Card {
+    box-sizing: border-box;
+    height: 85%;
+    width: 30%;
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 10px;
+}
+.image img {
+    max-width: 50%;
+    max-height: 100%;
+
+}
+.image {
+    height: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.bottom {
+    margin-top: 50px;
+    height: 30%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.statusBar {
+    width: 200px;
+    height: 30px;
+    border: 1px solid black;
+    background-color: #1a1b1c;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+.innerBar {
+    height: 100%;
+    background-color: #9f0000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.energyBar {
+    height: 100%;
+    background-color: darkcyan;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.insideCard {
+    width: 100%;
+    height: 100%;
+}
+
+/*FLEX*/
+.d-flex {
+    display: flex;
+}
+.wrap {
+    flex-wrap: wrap;
+}
+.column {
+    flex-direction: column;
+}
+.a-end {
+    align-items: end;
+}
+.j-end {
+    justify-content: end;
+}
+.a-center {
+    align-items: center;
+}
+
+.j-center {
+    justify-content: center;
+}
+.a-self-r {
+    align-self: end;
+}
+
+/*MARGIN/PADDING/W/H*/
+.h80 {
+    height: 80%;
+}
+.h100 {
+    height: 100%;
+}
+.ml40 {
+    margin-left: 40px;
+}
+
+.m0 {
+    margin: 0;
+}
+.w50 {
+    width: 50%;
+}
+.w100 {
+    width: 100%;
 }
