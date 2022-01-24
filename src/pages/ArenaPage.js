@@ -755,7 +755,6 @@ const ArenaPage = () => {
 
                 <div style={{backgroundColor: "transparent", boxShadow: "none"}} className="Card">
                     <div className='d-flex j-center a-center h50 w100'>
-                        <button onClick={MonsterDead}>Drop</button>
                         {!getMonster && !getStart ? <button className='arenaBtn' onClick={findEnemy}>FIND ENEMY</button> : null}
                         {getMonster && !getStart ? <button className='arenaBtn' onClick={start}>START FIGHT</button> : null}
                         {getMonster && getStart && !getWin && !getGameOver ?
