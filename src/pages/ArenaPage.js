@@ -7,13 +7,13 @@ import {setEnergy} from "../features/energy";
 import ToolBar from "../components/ToolBar";
 import {useNavigate} from "react-router";
 import {removeFromInventory} from "../features/InventoryArr";
-import {findAllByDisplayValue} from "@testing-library/react";
+import {setInventory} from "../features/InventoryArr";
+import {setDrop, removeDrop, setDropInitial} from "../features/dropArray";
 
 const ArenaPage = () => {
     const [getEnemy, setEnemy] = useState({})
     const [getMonster, setMonster] = useState(false)
     const [monsterDmg, setMonsterDmg] = useState()
-    const [getMaxEnergy, setMaxEnergy] = useState()
     const [getStart, setStart] = useState(false)
     const [getGameOver, setGameOver] = useState(false)
     const [getWin, setWin] = useState(false)
@@ -31,7 +31,7 @@ const ArenaPage = () => {
     const navigate = useNavigate()
     const weaponRandomDmg = Math.round(Math.random() * equip.maxDamage)
     const inventory = useSelector((state => state.inventory.value))
-    const inventoryOpen = useSelector((state => state.inventoryOpen.value))
+    const drop = useSelector((state => state.drop.value))
     const monsters = [
         {
             image: "https://static.wikia.nocookie.net/wowwiki/images/b/b1/Basilisk.png",
@@ -647,14 +647,18 @@ const ArenaPage = () => {
         }
     }
 
+    function sendToInv (x, i) {
+        dispatch(setInventory(x))
+        dispatch(removeDrop(i))
 
+    }
     function findEnemy() {
 
         const randomNum = Math.floor(Math.random() * monsters.length)
         setMonsterDmg(Math.floor(Math.random() * monsters[randomNum].maxDamage)) //random damage
         setEnemy(monsters[randomNum])
         setMonster(true)
-        // setMaxEnergy(energy)
+        dispatch(setDropInitial([]))
     }
 
     function findNewEnemy() {
@@ -664,35 +668,23 @@ const ArenaPage = () => {
         setStart(false)
     }
 
-    // const [getItemNumb, setItemNumb] = useState()
-    // const [getDrop, setDrop] = useState([])
 
     function start() {
         setStart(!getStart)
         dispatch(setEnemyHp(getEnemy.health))
-        // setItemNumb(Math.floor(Math.random() * getEnemy.maxItemsDrop + 10))
     }
 
-    // const randomNumbers = []
-    //
-    // function getItemsArray() {
-    //     for (let i = 0; i < getItemNumb; i++) {
-    //         getRandom()
-    //     }
-    // }
-    //
-    // function getRandom() {
-    //     const itemsToDrop = Math.floor(Math.random() * dropItems.length)
-    //     setDrop([...getDrop, itemsToDrop])
-    //     console.log(getDrop)
-    // }
-    //
-    // const drop = randomNumbers.map((x, i) =>
-    //     <div key={i}>
-    //         <img src={dropItems[x].image} alt=""/>
-    //     </div>
-    // )
-
+    const itemsToDrop = []
+    function MonsterDead () {
+        const monsterDropRandomNum = Math.floor(Math.random() * getEnemy.maxItemsDrop)
+        for (let i = 0; i < monsterDropRandomNum; i++) {
+            const dropIndex = Math.floor(Math.random() * dropItems.length)
+            itemsToDrop.push(dropItems[dropIndex])
+             }
+        for (let i = 0; i < itemsToDrop.length; i++) {
+            dispatch(setDrop(itemsToDrop[i]))
+        }
+    }
 
     function attack() {
         if (playerHp > 0) {
@@ -708,7 +700,9 @@ const ArenaPage = () => {
                         dispatch(setEnemyHp(enemyHp - character.damage))
                     }
                 } else {
+                    MonsterDead()
                     setWin(!getWin)
+
                 }
             } else alert("neužtenka energijos!")
         } else {
@@ -761,6 +755,7 @@ const ArenaPage = () => {
 
                 <div style={{backgroundColor: "transparent", boxShadow: "none"}} className="Card">
                     <div className='d-flex j-center a-center h50 w100'>
+                        <button onClick={MonsterDead}>Drop</button>
                         {!getMonster && !getStart ? <button className='arenaBtn' onClick={findEnemy}>FIND ENEMY</button> : null}
                         {getMonster && !getStart ? <button className='arenaBtn' onClick={start}>START FIGHT</button> : null}
                         {getMonster && getStart && !getWin && !getGameOver ?
@@ -817,8 +812,13 @@ const ArenaPage = () => {
                                 </div>
                             </div>
                         </div>
-                        : null }
-
+                        : null  }
+                    {getWin && getMonster ?
+                        <div className='drop'>
+                            {drop.map((x, i) => <div onClick={() => sendToInv(x, i)} key={i}>
+                                <img src={x.image} alt=""/>
+                            </div>)}
+                    </div> : null}
 
                 </div>
             </div>

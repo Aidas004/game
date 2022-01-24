@@ -14,6 +14,7 @@ import playerHpReducer from "./features/playerHp";
 import enemyHpReducer from "./features/enemyHp";
 import energyReducer from "./features/energy"
 import inventoryOpenReducer from "./features/openInventory"
+import dropReducer from "./features/dropArray"
 
 
 const store = configureStore({
@@ -26,7 +27,8 @@ const store = configureStore({
         playerHp: playerHpReducer,
         enemyHp: enemyHpReducer,
         energy: energyReducer,
-        inventoryOpen: inventoryOpenReducer
+        inventoryOpen: inventoryOpenReducer,
+        drop: dropReducer
 
     }
 })
